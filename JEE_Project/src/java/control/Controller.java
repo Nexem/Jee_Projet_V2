@@ -10,38 +10,30 @@ import javax.servlet.http.HttpSession;
 import jee.model.DataAccess;
 import jee.model.EmployeeBean;
 import jee.model.User;
+import jee.model.constants;
 
 public class Controller extends HttpServlet {
 
     ArrayList<EmployeeBean> listEmployees;
     ArrayList<User> listUsers;
     DataAccess db;
-    String queryEmployees;
-    String queryUser;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        
         db = new DataAccess();
-        queryEmployees = "SELECT * from EMPLOYEES";
-        queryUser = "SELECT * from LISTUSERS";
-
+        
         // List of employees from database
-        listEmployees = db.getEmployees(
-                db.getResultSet(
-                        db.getStatement(
-                                db.getConnection()), queryEmployees));
+        listEmployees = db.getEmployees(db.getResultSet(db.getStatement(
+                                db.getConnection()), constants.QUERYEMPLOYEES));
         
         // Store the list of employees in a scope object
         session.setAttribute("employeesList",listEmployees );
 
         // Credentials retrived from the database
-        listUsers = db.getUsers(
-                db.getResultSet(
-                        db.getStatement(
-                                db.getConnection()), queryUser));
+        listUsers = db.getUsers(db.getResultSet(db.getStatement(
+                                db.getConnection()), constants.QUERYUSER));
 
         String loginEntered = request.getParameter("loginField");
         String pwdEntered = request.getParameter("pwdField");
