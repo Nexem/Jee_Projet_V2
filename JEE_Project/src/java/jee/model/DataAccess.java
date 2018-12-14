@@ -65,6 +65,13 @@ public class DataAccess {
                 EmployeeBean employee = new EmployeeBean();
                 employee.setFirstName(rs.getString("FIRSTNAME"));
                 employee.setName(rs.getString("NAME"));
+                employee.setHomePhone(rs.getString("HOME_PHONE"));
+                employee.setMobilePhone(rs.getString("MOBILE_PHONE"));
+                employee.setWorkPhone(rs.getString("WORK_PHONE"));
+                employee.setAddress(rs.getString("ADDRESS"));
+                employee.setPostalCode(rs.getString("POSTAL_CODE"));
+                employee.setCity(rs.getString("CITY"));
+                employee.setEmail(rs.getString("EMAIL"));
                 employeesList.add(employee);
             }
         } catch (SQLException sqle) {

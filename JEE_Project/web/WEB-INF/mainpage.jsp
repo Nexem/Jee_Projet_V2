@@ -45,13 +45,13 @@
                 </c:forEach>
             </table>
             <form name="DeleteForm" action="Controller">
-                <button value="Delete"/>
+                <input value="Delete" type="submit"/>
             </form>
             <form name="DetailsForm" action="details">
-                <button value="Details"/>
+                <input value="Details" type="submit"/>
             </form>
             <form name="AddForm" action="add">
-                <button value="Add"/>
+                <input value="Add" type="submit"/>
             </form>
             <%}
         %>
