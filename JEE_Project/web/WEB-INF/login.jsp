@@ -6,7 +6,7 @@
         <title>Login Page</title>
     </head>
     <body>       
-        <form name="LoginForm" action="Controller">
+        <form name="LoginForm" method="POST" action="Controller">
             <table>
                 <tr>
                     <th>Login : </th><th><input type="text" name="loginField"/> </th>
