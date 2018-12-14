@@ -32,6 +32,14 @@
                     <tr>
                         <td><input type="radio" name="Sel" value="Sel"/><td>
                         <td><c:out value="${emp.name}"/></td>
+                        <td><c:out value="${emp.firstName}"/></td>
+                        <td><c:out value="${emp.homePhone}"/></td>
+                        <td><c:out value="${emp.mobilePhone}"/></td>
+                        <td><c:out value="${emp.workPhone}"/></td>
+                        <td><c:out value="${emp.address}"/></td>
+                        <td><c:out value="${emp.postalCode}"/></td>
+                        <td><c:out value="${emp.city}"/></td>
+                        <td><c:out value="${emp.email}"/></td>
                         
                     </tr>
                 </c:forEach>
