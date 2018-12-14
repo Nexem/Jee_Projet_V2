@@ -14,47 +14,51 @@
                 <h2 color="blue"><b>The club has no member</b></h2>
         <%  }
             else{%>
-            <table style="width:100%">
+            <table style="width:98%; table-layout:fixed">
                 <tr>
-                    <th>Sél</th>
-                    <th>NAME</th>
-                    <th>FIRST NAME</th>
-                    <th>HOME PHONE</th>
-                    <th>MOBILE PHONE</th>
-                    <th>WORK PHONE</th>
-                    <th>ADDRESS</th>
-                    <th>POSTAL CODE</th>
-                    <th>CITY</th>
-                    <th>EMAIL</th>
+                    <th style="width:3%">Sél</th>
+                    <th align="center">NAME</th>
+                    <th align="center">FIRST NAME</th>
+                    <th align="center">HOME PHONE</th>
+                    <th align="center">MOBILE PHONE</th>
+                    <th align="center">WORK PHONE</th>
+                    <th align="center">ADDRESS</th>
+                    <th align="center">POSTAL CODE</th>
+                    <th align="center">CITY</th>
+                    <th align="center">EMAIL</th>
                 </tr>
 
                 <c:forEach items="${employeesList}" var="emp">
                     <tr>
-                        <td><input type="radio" name="Sel" value="Sel"/><td>
-                        <td><c:out value="${emp.name}"/></td>
-                        <td><c:out value="${emp.firstName}"/></td>
-                        <td><c:out value="${emp.homePhone}"/></td>
-                        <td><c:out value="${emp.mobilePhone}"/></td>
-                        <td><c:out value="${emp.workPhone}"/></td>
-                        <td><c:out value="${emp.address}"/></td>
-                        <td><c:out value="${emp.postalCode}"/></td>
-                        <td><c:out value="${emp.city}"/></td>
-                        <td><c:out value="${emp.email}"/></td>
+                        <td align="center"><input type="radio" name="Sel" value="Sel"/></td>
+                        <td align="center"><c:out value="${emp.name}"/></td>
+                        <td align="center"><c:out value="${emp.firstName}"/></td>
+                        <td align="center"><c:out value="${emp.homePhone}"/></td>
+                        <td align="center"><c:out value="${emp.mobilePhone}"/></td>
+                        <td align="center"><c:out value="${emp.workPhone}"/></td>
+                        <td align="center"><c:out value="${emp.address}"/></td>
+                        <td align="center"><c:out value="${emp.postalCode}"/></td>
+                        <td align="center"><c:out value="${emp.city}"/></td>
+                        <td align="center"><c:out value="${emp.email}"/></td>
                         
                     </tr>
                 </c:forEach>
             </table>
-            <form name="DeleteForm" action="Controller">
-                <input value="Delete" type="submit"/>
-            </form>
-            <form name="DetailsForm" action="details">
-                <input value="Details" type="submit"/>
-            </form>
-            <form name="AddForm" action="add">
-                <input value="Add" type="submit"/>
-            </form>
             <%}
         %>
-        
+        </br>
+        <table>
+            <tr>
+                <form name="DeleteForm" action="Controller">
+                    <input value="Delete" type="submit"/>
+                </form>
+                <form name="DetailsForm" action="details">
+                    <input value="Details" type="submit"/>
+                </form>
+                <form name="AddForm" action="add">
+                    <input value="Add" type="submit"/>
+                </form>
+            </tr>
+        </table>
     </body>
 </html>
