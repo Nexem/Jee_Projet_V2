@@ -22,7 +22,6 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //To be able to use the "session" object like we did in the JSPs
         HttpSession session = request.getSession();
         
         db = new DataAccess();
@@ -44,11 +43,9 @@ public class Controller extends HttpServlet {
                         db.getStatement(
                                 db.getConnection()), queryUser));
 
-        // User input
         String loginEntered = request.getParameter("loginField");
         String pwdEntered = request.getParameter("pwdField");
 
-        //Compare credentials only if the user has entered something
         if (loginEntered != null && pwdEntered != null) {
             for (User u : listUsers) {
 

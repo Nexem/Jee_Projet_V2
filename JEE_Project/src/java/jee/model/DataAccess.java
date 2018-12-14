@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jee.model;
 
 import java.sql.Connection;
@@ -13,10 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Jacques
- */
 public class DataAccess {
 
     private Connection dbConn;
@@ -98,7 +89,7 @@ public class DataAccess {
             while (rs.next()) {
                 User u = new User();
                 u.setLogin(rs.getString("LOGIN"));
-                u.setPwd(rs.getString("PWD"));
+                u.setPwd(rs.getString("PASSWORD"));
                 usersList.add(u);
             }
         } catch (SQLException sqle) {
