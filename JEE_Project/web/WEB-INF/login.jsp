@@ -1,17 +1,15 @@
-%<@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login page</title>
+        <title>Login Page</title>
     </head>
-    <body>
-        <form name="loginFrm" action="Controller">
-            Login <input type="text" name="loginField" />
-            <br />
-            Pass <input type="text" name="pwdField" />
-            <br />
-            <input type="submit" name="btnOK" value="Login" />
+    <body>       
+        <form name="LoginForm" action="Controller.jsp">
+            Login : <input type="text" name="loginField"/> <br/>
+            Password : <input type="text" name="pwdField"/>
+            <input type="submit" name="validateBtn" value="Send"/>
         </form>
     </body>
 </html>

@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package control;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,10 +11,6 @@ import jee.model.DataAccess;
 import jee.model.EmployeeBean;
 import jee.model.User;
 
-/**
- *
- * @author Jacques
- */
 public class Controller extends HttpServlet {
 
     ArrayList<EmployeeBean> listEmployees;
@@ -29,15 +19,6 @@ public class Controller extends HttpServlet {
     String queryEmployees;
     String queryUser;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -72,7 +53,7 @@ public class Controller extends HttpServlet {
             for (User u : listUsers) {
 
                 if ((loginEntered.equals(u.getLogin())) && pwdEntered.equals(u.getPwd())) {
-                    request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/mainpage.jsp").forward(request, response);
                 }
             }
         }else{
