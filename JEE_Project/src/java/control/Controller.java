@@ -40,15 +40,23 @@ public class Controller extends HttpServlet {
 
         if (loginEntered != null && pwdEntered != null) {
             for (User u : listUsers) {
-
                 if ((loginEntered.equals(u.getLogin())) && pwdEntered.equals(u.getPwd())) {
                     request.getRequestDispatcher("WEB-INF/mainpage.jsp").forward(request, response);
                 }
+                else{
+                    session.setAttribute("message", "Connection failed ! Verify your login/password and try again");
+                    request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+                }
             }
-        }else{
+        }else if(loginEntered == "" || pwdEntered == ""){
+            session.setAttribute("message", "You must enter values in both fields");
+            request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+        }
+        else{
             request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
         }
 
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

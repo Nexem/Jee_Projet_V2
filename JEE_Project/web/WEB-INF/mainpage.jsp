@@ -50,13 +50,13 @@
         <table>
             <tr>
                 <form name="DeleteForm" action="Controller">
-                    <input value="Delete" type="submit"/>
+                    <input value="Delete" name="delete" type="submit"/>
                 </form>
-                <form name="DetailsForm" action="details">
-                    <input value="Details" type="submit"/>
+                <form name="DetailsForm" action="Controller">
+                    <input value="Details" name="details" type="submit"/>
                 </form>
-                <form name="AddForm" action="add">
-                    <input value="Add" type="submit"/>
+                <form name="AddForm" action="Controller">
+                    <input value="Add" name="add" type="submit"/>
                 </form>
             </tr>
         </table>

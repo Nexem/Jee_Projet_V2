@@ -5,7 +5,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
     </head>
-    <body>       
+    <body>  
+        <h3 style="color:red">
+        <%
+          if (session.getAttribute("message")!= null){
+              out.println(session.getAttribute("message"));
+              session.removeAttribute("message");
+          }  
+        %>
+        </h3>
         <form name="LoginForm" method="POST" action="Controller">
             <table>
                 <tr>
