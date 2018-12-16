@@ -12,8 +12,17 @@
             if(session.getAttribute("employeesList") == null){
                 %>
                 <h2 color="blue"><b>The club has no member</b></h2>
+                </br>
+                <form name="AddForm" action="Controller">
+                    <input value="Add" name="button" type="submit"/>
+                </form>
         <%  }
-            else{%>
+            else{
+                if (session.getAttribute("message")!= null){
+                    out.println(session.getAttribute("message"));
+                    session.removeAttribute("message");
+                }  
+        %>
             <table style="width:98%; table-layout:fixed">
                 <tr>
                     <th style="width:3%">Sél</th>
@@ -30,7 +39,7 @@
 
                 <c:forEach items="${employeesList}" var="emp">
                     <tr>
-                        <td align="center"><input type="radio" name="Sel" value="Sel"/></td>
+                        <td align="center"><input type="radio" name="ID" value="${emp.ID}"/></td>
                         <td align="center"><c:out value="${emp.name}"/></td>
                         <td align="center"><c:out value="${emp.firstName}"/></td>
                         <td align="center"><c:out value="${emp.homePhone}"/></td>
@@ -44,21 +53,22 @@
                     </tr>
                 </c:forEach>
             </table>
-            <%}
-        %>
-        </br>
+            </br>
         <table>
             <tr>
-                <form name="DeleteForm" action="Controller">
-                    <input value="Delete" name="delete" type="submit"/>
+                <form name="DeleteForm"  method ="POST" action="Controller">
+                    <input value="Delete" name="button" type="submit"/>
                 </form>
-                <form name="DetailsForm" action="Controller">
-                    <input value="Details" name="details" type="submit"/>
+                <form name="DetailsForm" method ="POST" action="Controller">
+                    <input value="Details" name="button" type="submit"/>
                 </form>
-                <form name="AddForm" action="Controller">
-                    <input value="Add" name="add" type="submit"/>
+                <form name="AddForm" method ="POST" action="Controller">
+                    <input value="Add" name="button" type="submit"/>
                 </form>
             </tr>
         </table>
+            <%}
+        %>
+        
     </body>
 </html>

@@ -79,6 +79,27 @@ public class DataAccess {
         }
         return employeesList;
     }
+    
+    public EmployeeBean getEmployee(ResultSet rs) {
+        EmployeeBean employee = new EmployeeBean();
+        try {
+            while (rs.next()) {
+                employee.setFirstName(rs.getString("FIRSTNAME"));
+                employee.setName(rs.getString("NAME"));
+                employee.setHomePhone(rs.getString("HOME_PHONE"));
+                employee.setMobilePhone(rs.getString("MOBILE_PHONE"));
+                employee.setWorkPhone(rs.getString("WORK_PHONE"));
+                employee.setAddress(rs.getString("ADDRESS"));
+                employee.setPostalCode(rs.getString("POSTAL_CODE"));
+                employee.setCity(rs.getString("CITY"));
+                employee.setEmail(rs.getString("EMAIL"));
+                employeesList.add(employee);
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+        }
+        return employee;
+    }
 
     public String showEmployees(ArrayList<EmployeeBean> employeesList) {
            String output = "";

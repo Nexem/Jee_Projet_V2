@@ -11,6 +11,7 @@ package jee.model;
  */
 public class EmployeeBean {
     
+    private int ID;
     private String name;
     private String firstName;
     private String homePhone;
@@ -21,6 +22,14 @@ public class EmployeeBean {
     private String city;
     private String email;
 
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+    
     public String getHomePhone() {
         return homePhone;
     }
