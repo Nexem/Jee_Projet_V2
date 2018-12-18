@@ -5,32 +5,40 @@
 --%>
 
 <%@page import="jee.model.EmployeeBean"%>
-<%@page import="jee.model.constants"%>
+<%@page import="Utils.constants"%>
 <%@page import="jee.model.DataAccess"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <%
-    if(session.getAttribute("ID_user_details") != null){
-        String ID = (String)session.getAttribute("ID_user_details");
+    String id = (String)session.getAttribute("ID_user_details");
+    if(id != null){
         session.removeAttribute("ID_user_details");
         DataAccess db = new DataAccess();
 
-        String details_query = constants.QUERY_DETAILS_ID + ID;
-        EmployeeBean emp = db.getEmployee(db.getResultSet(db.getStatement(db.getConnection()), details_query));
-
+        String details_query = constants.QUERY_DETAILS_ID + id;
+        EmployeeBean empD = db.getEmployee(db.getResultSet(db.getStatement(db.getConnection()), details_query));
+        String name = empD.getName();
     }
-    
 %>
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Details</title>
+        <title>Details <% out.print(id); %></title>
     </head>
     <body>
+        <table align="right">
+            <th style="color:blue">Your session is active</th>
+            <td>
+                <form action="Controller" method="POST">
+                    <button type="submit" name="OffButton" value="goodbye">Disconnect</button>
+                    <!--input type="image" src="../../../image.jpg" name="OffButton" value="goodbye" width="100" height="100"-->
+                </form>
+            </td>
+        </table>
         <form name="DetailsForm" method ="POST" action="Controller">
-        <h1>Details of employee : ${emp.name} ${emp.firstName}</h1>
+            <h1>Details of employee : ${name} </h1>
         <th>Nom</th><th><input type="text" name="nameField" value="${emp.name}"/></th>
         <th>Prénom</th><th><input type="text" name="prenomField" value="${emp.firstName}"/> </th>
         <th>Tél dom</th><th><input type="text" name="tel_domField" value="${emp.homePhone}"/> </th>

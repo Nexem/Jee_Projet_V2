@@ -12,20 +12,29 @@
         <title>Add employee</title>
     </head>
     <body>
+        <table align="right">
+            <th style="color:blue">Your session is active</th>
+            <td>
+                <form action="Controller" method="POST">
+                    <button type="submit" name="OffButton" value="goodbye">Disconnect</button>
+                    <!--input type="image" src="../../../image.jpg" name="OffButton" value="goodbye" width="100" height="100"-->
+                </form>
+            </td>
+        </table>
         <h1>Add a new employee</h1>
-        <th>Nom</th><th><input type="text" name="nameField"/></th>
-        <th>Prénom</th><th><input type="text" name="prenomField"/> </th>
-        <th>Tél dom</th><th><input type="text" name="tel_domField"/> </th>
-        <th>Tél mob</th><th><input type="text" name="tel_mobField"/> </th>
-        <th>Tél pro</th><th><input type="text" name="tel_proField"/> </th>
-        <th>Adresse</th><th><input type="text" name="adresseField"/> </th>
-        <th>Code postal</th><th><input type="text" name="codepostalField"/> </th>
-        <th>Ville</th><th><input type="text" name="villeField"/> </th>
-        <th>Adresse e-mail</th><th><input type="text" name="emailField"/> </th>
+        <th>Nom</th><th><input type="text" name="nameField"/></th></br>
+        <th>Prénom</th><th><input type="text" name="prenomField"/> </th></br>
+        <th>Tél dom</th><th><input type="text" name="tel_domField"/> </th></br>
+        <th>Tél mob</th><th><input type="text" name="tel_mobField"/> </th></br>
+        <th>Tél pro</th><th><input type="text" name="tel_proField"/> </th></br>
+        <th>Adresse</th><th><input type="text" name="adresseField"/> </th></br>
+        <th>Code postal</th><th><input type="text" name="codepostalField"/> </th></br>
+        <th>Ville</th><th><input type="text" name="villeField"/> </th></br>
+        <th>Adresse e-mail</th><th><input type="text" name="emailField"/> </th></br>
         <form name="SaveForm" action="Controller">
             <input value="Save" type="submit"/>
         </form>
-        <form name="CancelForm" action="mainpage">
+        <form name="CancelForm" action="Controller">
             <input value="Cancel" type="submit"/>
         </form>
     </body>

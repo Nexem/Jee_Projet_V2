@@ -33,6 +33,28 @@ public class DataAccess {
         }
         return dbConn;
     }
+    /*NE FONCTIONNE PAS, EN LIEN AVEC LE db.propertiesf
+    public Connection getConnection() {
+        try {
+            Properties prop = new Properties();
+            InputStream input;
+            ClassLoader cl = Thread.currentThread().getContextClassLoader();
+            input = cl.getResourceAsStream(constants.PROPERTIES_FILE);
+            prop.load(input);
+            
+            dbUrl = prop.getProperty(constants.DB_URL);
+            user = prop.getProperty(constants.DB_USER);
+            pwd = prop.getProperty(constants.DB_PWD);
+
+            dbConn = DriverManager.getConnection(dbUrl, user, pwd);
+
+        } catch (SQLException | IOException ex) {
+             Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dbConn;
+
+    }
+    */
 
     public Statement getStatement(Connection dbConn) {
         try {
@@ -93,7 +115,6 @@ public class DataAccess {
                 employee.setPostalCode(rs.getString("POSTAL_CODE"));
                 employee.setCity(rs.getString("CITY"));
                 employee.setEmail(rs.getString("EMAIL"));
-                employeesList.add(employee);
             }
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());

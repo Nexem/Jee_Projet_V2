@@ -1,4 +1,4 @@
-package jee.model;
+package Utils;
 
 public class constants {
     
@@ -11,4 +11,9 @@ public class constants {
     public static final String LOGINPAGE = "WEB-INF/login.jsp";
     public static final String ADDPAGE = "WEB-INF/add.jsp";
     public static final String DETAILSPAGE = "WEB-INF/details.jsp";
+    public static final String PROPERTIES_FILE="Utils/db.properties";
+    
+    public static final String DB_URL = "dbUrl";
+    public static final String DB_USER = "dbUser";
+    public static final String DB_PWD = "dbPwd";
 }

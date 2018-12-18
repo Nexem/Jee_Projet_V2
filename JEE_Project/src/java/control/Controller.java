@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import jee.model.DataAccess;
 import jee.model.EmployeeBean;
 import jee.model.User;
-import jee.model.constants;
+import Utils.constants;
 
 public class Controller extends HttpServlet {
 
@@ -36,10 +36,57 @@ public class Controller extends HttpServlet {
         listUsers = db.getUsers(db.getResultSet(db.getStatement(
                                 db.getConnection()), constants.QUERYUSER));
 
+        String OffButton = request.getParameter("OffButton");
+                
+        if("goodbye".equals(OffButton)){
+            request.getRequestDispatcher("WEB-INF/goodbye.jsp").forward(request, response);
+            return;
+        }
+        
+        String button = request.getParameter("button");
+        String id = request.getParameter("ID");
+        
+        while(OffButton == null){
+            if(button != null ){
+                if("Add".equals(button)){
+                    request.getRequestDispatcher(constants.ADDPAGE).forward(request, response);
+                }
+                else if("Delete".equals(button)){
+                    if(id != null){
+                        String delete_query = constants.QUERY_DELETE_USER_ID + id;
+                        db.getResultSet(db.getStatement(db.getConnection()), delete_query);
+                        request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+                    }
+                    else{
+                        session.setAttribute("message", "You must select an employee1");
+                        request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+                    }
+                }
+                else if("Details".equals(button)){
+                    
+                    if(id != null){
+                        session.setAttribute("ID_user_details", id);
+                        request.getRequestDispatcher(constants.DETAILSPAGE).forward(request, response);
+                    }
+                    else{
+                        session.setAttribute("message", "You must select an employee2");
+                        request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+                    }
+                }
+            }
+            else{
+                System.out.println(request.getParameter("button"));
+                session.setAttribute("message", "else");
+                request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+            }
+            
+        }
+        
+        
         String loginEntered = request.getParameter("loginField");
         String pwdEntered = request.getParameter("pwdField");
 
-        if ((loginEntered != null && pwdEntered != null) || (session.getAttribute("sessionPwd") != null && session.getAttribute("sessionLogin") != null )) {
+        if ((loginEntered != null && pwdEntered != null)) {
             for (User u : listUsers) {
                 if ((loginEntered.equals(u.getLogin())) && pwdEntered.equals(u.getPwd())) {
                     if(session.getAttribute(pwdEntered) == null && session.getAttribute(loginEntered) == null ){
@@ -62,36 +109,8 @@ public class Controller extends HttpServlet {
         }
         
         
-        if(request.getParameter("button") != null ){
-            String button = (String)request.getParameter("button");
-            if(button.equals("Add")){
-                request.getRequestDispatcher(constants.ADDPAGE).forward(request, response);
-            }
-            else if(button.equals("Delete")){
-                if(request.getParameter("ID") != null){
-                    String ID = request.getParameter("ID");
-                    String delete_query = constants.QUERY_DELETE_USER_ID + ID;
-                    db.getResultSet(db.getStatement(db.getConnection()), delete_query);
-                    request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
-                }
-                else{
-                    session.setAttribute("message", "You must select an employee1");
-                    request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
-                }
-            }
-            else if(button.equals("Details")){
-                if(request.getParameter("ID") != null){
-                    session.setAttribute("ID_user_details", request.getParameter("ID"));
-                    request.getRequestDispatcher(constants.DETAILSPAGE).forward(request, response);
-                }
-                else{
-                    session.setAttribute("message", "You must select an employee2");
-                    request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
-                }
-            }
-        }
         
-
+        
         
     }
 
