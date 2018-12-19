@@ -12,8 +12,9 @@
 
 <%
     String id = (String)session.getAttribute("ID_user_details");
-    String name ="";
-    EmployeeBean emp;
+    String name = "";
+    String firstname ="";
+    EmployeeBean emp = null;
     if(id != null){
         session.removeAttribute("ID_user_details");
         DataAccess db = new DataAccess();
@@ -21,13 +22,14 @@
         String details_query = constants.QUERY_DETAILS_ID + id;
         emp = db.getEmployee(db.getResultSet(db.getStatement(db.getConnection()), details_query));
         name = emp.getName();
+        firstname = emp.getFirstName();
     }
 %>
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Details <% out.print(id); out.print(name); %></title>
+        <title>Details <%out.print(name);%></title>
     </head>
     <body>
         <table align="right">
@@ -40,18 +42,20 @@
             </td>
         </table>
         <form name="DetailsForm" method ="POST" action="Controller">
-            <h1>Details of employee : ${name} </h1>
-        <th>Nom</th><th><input type="text" name="nameField" value="${out.print(emp.name)}"/></th>
-        <th>Prénom</th><th><input type="text" name="prenomField" value="${emp.firstName}"/> </th>
-        <th>Tél dom</th><th><input type="text" name="tel_domField" value="${emp.homePhone}"/> </th>
-        <th>Tél mob</th><th><input type="text" name="tel_mobField" value="${emp.mobilePhone}"/> </th>
-        <th>Tél pro</th><th><input type="text" name="tel_proField" value="${emp.workPhone}"/> </th>
-        <th>Adresse</th><th><input type="text" name="adresseField" value="${emp.address}"/> </th>
-        <th>Code postal</th><th><input type="text" name="codepostalField" value="${emp.postalCode}"/> </th>
-        <th>Ville</th><th><input type="text" name="villeField" value="${emp.city}"/> </th>
-        <th>Adresse e-mail</th><th><input type="text" name="emailField" value="${emp.email}"/> </th>
-        <input value="Save" name="SaveDetails" type="submit"/>
-            <input value="Cancel" name="Cancel" type="submit"/>
+            <table align="right">
+                <h1>Details of employee : <%out.print(emp.getName()); out.print(("  " + emp.getFirstName()));%> </h1>
+                <th>Nom</th><th><input type="text" name="nameField" value="<%out.print(emp.getName());%>"/></th>
+                <th>Prénom</th><th><input type="text" name="prenomField" value="<%out.print(emp.getFirstName());%>"/> </th>
+                <th>Tél dom</th><th><input type="text" name="tel_domField" value="<%out.print(emp.getHomePhone());%>"/> </th>
+                <th>Tél mob</th><th><input type="text" name="tel_mobField" value="<%out.print(emp.getMobilePhone());%>"/> </th>
+                <th>Tél pro</th><th><input type="text" name="tel_proField" value="<%out.print(emp.getWorkPhone());%>"/> </th>
+                <th>Adresse</th><th><input type="text" name="adresseField" value="<%out.print(emp.getAddress());%>"/> </th>
+                <th>Code postal</th><th><input type="text" name="codepostalField" value="$<%out.print(emp.getPostalCode());%>"/> </th>
+                <th>Ville</th><th><input type="text" name="villeField" value="<%out.print(emp.getCity());%>"/> </th>
+                <th>Adresse e-mail</th><th><input type="text" name="emailField" value="<%out.print(emp.getEmail());%>"/> </th>
+                <input value="Save" name="SaveDetails" type="submit"/>
+                <input value="Cancel" name="Cancel" type="submit"/>
+            </table>
         </form>
     </body>
 </html>
