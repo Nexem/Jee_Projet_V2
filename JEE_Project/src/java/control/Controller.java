@@ -31,86 +31,84 @@ public class Controller extends HttpServlet {
         
         // Store the list of employees in a scope object
         session.setAttribute("employeesList",listEmployees );
+        
+        
+        
+        
+        String button = (String)request.getParameter("action");
+        if(button == null)
+            button = "";
+        
+        
+        if(button.equals("Send"))
+        {
+            // Credentials retrived from the database
+            listUsers = db.getUsers(db.getResultSet(db.getStatement(
+                                    db.getConnection()), constants.QUERYUSER));
 
-        // Credentials retrived from the database
-        listUsers = db.getUsers(db.getResultSet(db.getStatement(
-                                db.getConnection()), constants.QUERYUSER));
+            String loginEntered = request.getParameter("loginField");
+            String pwdEntered = request.getParameter("pwdField");
 
-        String OffButton = request.getParameter("OffButton");
-                
-        if("goodbye".equals(OffButton)){
+            if ((loginEntered != null && pwdEntered != null)) {
+                for (User u : listUsers) {
+                    if ((loginEntered.equals(u.getLogin())) && pwdEntered.equals(u.getPwd())) {
+                        if(session.getAttribute(pwdEntered) == null && session.getAttribute(loginEntered) == null ){
+                            session.setAttribute("sessionLogin", loginEntered);
+                            session.setAttribute("sessionPwd", pwdEntered);
+                        }
+                        request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+                    }
+                    else{
+                        session.setAttribute("message", "Connection failed ! Verify your login/password and try again");
+                        request.getRequestDispatcher(constants.LOGINPAGE).forward(request, response);
+                    }
+                }
+            }else if(loginEntered == "" || pwdEntered == ""){
+                session.setAttribute("message", "You must enter values in both fields");
+                request.getRequestDispatcher(constants.LOGINPAGE).forward(request, response);
+            }
+        }
+        
+        else if(button.equals("Add")){
+            request.getRequestDispatcher(constants.ADDPAGE).forward(request, response);
+        }
+        else if(button.equals("Delete")){
+            if(request.getParameter("ID") != null){
+                String ID = request.getParameter("ID");
+                String delete_query = constants.QUERY_DELETE_USER_ID + ID +"';";
+                db.getResultSet(db.getStatement(db.getConnection()), delete_query);
+                request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+            }
+            else{
+                session.setAttribute("message", "You must select an employee1");
+                request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+            }
+        }
+        else if(button.equals("Details")){
+            if(request.getParameter("ID") != null){
+                session.setAttribute("ID_user_details", request.getParameter("ID"));
+                request.getRequestDispatcher(constants.DETAILSPAGE).forward(request, response);
+            }
+            else{
+                session.setAttribute("message", "You must select an employee2");
+                request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+            }
+        }
+        
+        else if(button.equals("Goodbye")){
             request.getRequestDispatcher("WEB-INF/goodbye.jsp").forward(request, response);
             return;
         }
         
-        String button = request.getParameter("button");
-        String id = request.getParameter("ID");
-        
-        while(OffButton == null){
-            if(button != null ){
-                if("Add".equals(button)){
-                    request.getRequestDispatcher(constants.ADDPAGE).forward(request, response);
-                }
-                else if("Delete".equals(button)){
-                    if(id != null){
-                        String delete_query = constants.QUERY_DELETE_USER_ID + id;
-                        db.getResultSet(db.getStatement(db.getConnection()), delete_query);
-                        request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
-                    }
-                    else{
-                        session.setAttribute("message", "You must select an employee1");
-                        request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
-                    }
-                }
-                else if("Details".equals(button)){
-                    
-                    if(id != null){
-                        session.setAttribute("ID_user_details", id);
-                        request.getRequestDispatcher(constants.DETAILSPAGE).forward(request, response);
-                    }
-                    else{
-                        session.setAttribute("message", "You must select an employee2");
-                        request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
-                    }
-                }
-            }
-            else{
-                System.out.println(request.getParameter("button"));
-                session.setAttribute("message", "else");
-                request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
-            }
-            
+        else if(button.equals("GoToLogin")){
+            session.invalidate();
+            request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+            return;
         }
         
-        
-        String loginEntered = request.getParameter("loginField");
-        String pwdEntered = request.getParameter("pwdField");
-
-        if ((loginEntered != null && pwdEntered != null)) {
-            for (User u : listUsers) {
-                if ((loginEntered.equals(u.getLogin())) && pwdEntered.equals(u.getPwd())) {
-                    if(session.getAttribute(pwdEntered) == null && session.getAttribute(loginEntered) == null ){
-                        session.setAttribute("sessionLogin", loginEntered);
-                        session.setAttribute("sessionPwd", pwdEntered);
-                    }
-                    request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
-                }
-                else{
-                    session.setAttribute("message", "Connection failed ! Verify your login/password and try again");
-                    request.getRequestDispatcher(constants.LOGINPAGE).forward(request, response);
-                }
-            }
-        }else if(loginEntered == "" || pwdEntered == ""){
-            session.setAttribute("message", "You must enter values in both fields");
+        else if (session.getAttribute("sessionLogin") == null){
             request.getRequestDispatcher(constants.LOGINPAGE).forward(request, response);
         }
-        else{
-            request.getRequestDispatcher(constants.LOGINPAGE).forward(request, response);
-        }
-        
-        
-        
-        
         
     }
 

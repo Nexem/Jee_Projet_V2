@@ -13,5 +13,11 @@
     </head>
     <body>
         <h1>Goodbye !</h1>
+            <td>
+                <form action="Controller" method="POST">
+                    <button type="submit" name="action" value="GoToLogin">Return to login</button>
+                    <!--input type="image" src="../../../image.jpg" name="OffButton" value="goodbye" width="100" height="100"-->
+                </form>
+            </td>
     </body>
 </html>

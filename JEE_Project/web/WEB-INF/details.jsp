@@ -12,20 +12,22 @@
 
 <%
     String id = (String)session.getAttribute("ID_user_details");
+    String name ="";
+    EmployeeBean emp;
     if(id != null){
         session.removeAttribute("ID_user_details");
         DataAccess db = new DataAccess();
 
         String details_query = constants.QUERY_DETAILS_ID + id;
-        EmployeeBean empD = db.getEmployee(db.getResultSet(db.getStatement(db.getConnection()), details_query));
-        String name = empD.getName();
+        emp = db.getEmployee(db.getResultSet(db.getStatement(db.getConnection()), details_query));
+        name = emp.getName();
     }
 %>
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Details <% out.print(id); %></title>
+        <title>Details <% out.print(id); out.print(name); %></title>
     </head>
     <body>
         <table align="right">
@@ -39,7 +41,7 @@
         </table>
         <form name="DetailsForm" method ="POST" action="Controller">
             <h1>Details of employee : ${name} </h1>
-        <th>Nom</th><th><input type="text" name="nameField" value="${emp.name}"/></th>
+        <th>Nom</th><th><input type="text" name="nameField" value="${out.print(emp.name)}"/></th>
         <th>Prénom</th><th><input type="text" name="prenomField" value="${emp.firstName}"/> </th>
         <th>Tél dom</th><th><input type="text" name="tel_domField" value="${emp.homePhone}"/> </th>
         <th>Tél mob</th><th><input type="text" name="tel_mobField" value="${emp.mobilePhone}"/> </th>

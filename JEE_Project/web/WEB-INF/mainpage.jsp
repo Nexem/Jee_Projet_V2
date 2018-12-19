@@ -11,7 +11,7 @@
             <th style="color:blue">Your session is active</th>
             <td>
                 <form action="Controller" method="POST">
-                    <button type="submit" name="OffButton" value="goodbye">Disconnect</button>
+                    <button type="submit" name="action" value="Goodbye">Disconnect</button>
                     <!--input type="image" src="../../../image.jpg" name="OffButton" value="goodbye" width="100" height="100"-->
                 </form>
             </td>
@@ -73,9 +73,9 @@
             </br>
         <table>
             <tr>
-                <input value="Delete" name="button" type="submit"/>
-                <input value="Details" name="button" type="submit"/>
-                <input value="Add" name="button" type="submit"/>
+                <input value="Delete" name="action" type="submit"/>
+                <input value="Details" name="action" type="submit"/>
+                <input value="Add" name="action" type="submit"/>
             </tr>
         </table>
             </form>

@@ -14,7 +14,7 @@
           }  
         %>
         </h3>
-        <form name="LoginForm" method="POST" action="Controller">
+        <form method="POST" action="Controller">
             <table>
                 <tr>
                     <th>Login : </th><th><input type="text" name="loginField"/> </th>
@@ -25,7 +25,7 @@
                     <span class="focus-input100" data-placeholder="Password"></span>
                 </tr>
             </table>
-            <input type="submit" name="validateBtn" value="Send"/>
+            <input type="submit" name="action" value="Send"/>
 
         </form>
     </body>
