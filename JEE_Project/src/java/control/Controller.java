@@ -32,14 +32,13 @@ public class Controller extends HttpServlet {
         // Store the list of employees in a scope object
         session.setAttribute("employeesList",listEmployees );
         
-        
-        
-        
         String button = (String)request.getParameter("action");
         if(button == null)
             button = "";
         
         
+        //Button management
+        //To connect at the beginning, when we run the project, after the first redirection
         if(button.equals("Send"))
         {
             // Credentials retrived from the database
@@ -69,13 +68,16 @@ public class Controller extends HttpServlet {
             }
         }
         
+        //Add functionalities
         else if(button.equals("Add")){
             request.getRequestDispatcher(constants.ADDPAGE).forward(request, response);
         }
+        
+        //Delete functionalities
         else if(button.equals("Delete")){
             if(request.getParameter("ID") != null){
                 String ID = request.getParameter("ID");
-                String delete_query = constants.QUERY_DELETE_USER_ID + ID +"';";
+                String delete_query = constants.QUERY_DELETE_USER_ID + ID + ";";
                 db.getResultSet(db.getStatement(db.getConnection()), delete_query);
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
@@ -84,6 +86,8 @@ public class Controller extends HttpServlet {
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
         }
+        
+        //Buttons to access to details and cancel or register the new details
         else if(button.equals("Details")){
             if(request.getParameter("ID") != null){
                 session.setAttribute("ID_user_details", request.getParameter("ID"));
@@ -94,18 +98,35 @@ public class Controller extends HttpServlet {
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
         }
+        else if(button.equals("Save modifications")){
+            if(request.getParameter("ID") != null){
+                String ID = request.getParameter("ID");
+                
+                //faire les vérifications si champs modifiés ou non
+                
+                String update_query = constants.QUERY_UPDATE_USER_ID;
+                update_query += constants.QUERY_UPDATE_END_USER_ID + ID + ";";
+                db.getResultSet(db.getStatement(db.getConnection()), update_query);
+                request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+            }
+        }
+        else if(button.equals("Cancel modifications")){
+            request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+        }
         
+        //Disconnection functionalities
         else if(button.equals("Goodbye")){
-            request.getRequestDispatcher("WEB-INF/goodbye.jsp").forward(request, response);
+            request.getRequestDispatcher(constants.GOODBYEPAGE).forward(request, response);
             return;
         }
         
         else if(button.equals("GoToLogin")){
             session.invalidate();
-            request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+            request.getRequestDispatcher(constants.LOGINPAGE).forward(request, response);
             return;
         }
         
+        //Function to redirect first on the login page when we run the project
         else if (session.getAttribute("sessionLogin") == null){
             request.getRequestDispatcher(constants.LOGINPAGE).forward(request, response);
         }

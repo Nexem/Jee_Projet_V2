@@ -42,20 +42,21 @@
             </td>
         </table>
         <form name="DetailsForm" method ="POST" action="Controller">
-            <table align="right">
                 <h1>Details of employee : <%out.print(emp.getName()); out.print(("  " + emp.getFirstName()));%> </h1>
-                <th>Nom</th><th><input type="text" name="nameField" value="<%out.print(emp.getName());%>"/></th>
-                <th>Prénom</th><th><input type="text" name="prenomField" value="<%out.print(emp.getFirstName());%>"/> </th>
-                <th>Tél dom</th><th><input type="text" name="tel_domField" value="<%out.print(emp.getHomePhone());%>"/> </th>
-                <th>Tél mob</th><th><input type="text" name="tel_mobField" value="<%out.print(emp.getMobilePhone());%>"/> </th>
-                <th>Tél pro</th><th><input type="text" name="tel_proField" value="<%out.print(emp.getWorkPhone());%>"/> </th>
-                <th>Adresse</th><th><input type="text" name="adresseField" value="<%out.print(emp.getAddress());%>"/> </th>
-                <th>Code postal</th><th><input type="text" name="codepostalField" value="$<%out.print(emp.getPostalCode());%>"/> </th>
-                <th>Ville</th><th><input type="text" name="villeField" value="<%out.print(emp.getCity());%>"/> </th>
-                <th>Adresse e-mail</th><th><input type="text" name="emailField" value="<%out.print(emp.getEmail());%>"/> </th>
-                <input value="Save" name="SaveDetails" type="submit"/>
-                <input value="Cancel" name="Cancel" type="submit"/>
+                Nom <input type="text" name="nameField" value="<%out.print(emp.getName());%>"/></br></br>
+                Prénom <input type="text" name="prenomField" value="<%out.print(emp.getFirstName());%>"/> </br></br>
+                Tél dom <input type="text" name="tel_domField" value="<%out.print(emp.getHomePhone());%>"/> </br></br>
+                Tél mob <input type="text" name="tel_mobField" value="<%out.print(emp.getMobilePhone());%>"/> </br></br>
+                Tél pro <input type="text" name="tel_proField" value="<%out.print(emp.getWorkPhone());%>"/> </br></br>
+                Adresse <input type="text" name="adresseField" value="<%out.print(emp.getAddress());%>"/> </br></br>
+                Code postal <input type="text" name="codepostalField" value="<%out.print(emp.getPostalCode());%>"/> </br></br>
+                Ville <input type="text" name="villeField" value="<%out.print(emp.getCity());%>"/> </br></br>
+                Adresse e-mail <input type="text" name="emailField" value="<%out.print(emp.getEmail());%>"/> </br></br>  
             </table>
+        </form>
+        <form name="DetailsButtonsForm" method ="POST" action="Controller">
+            <input value="Save modifications" name="action" type="submit"/>
+            <input value="Cancel modifications" name="action" type="submit"/>
         </form>
     </body>
 </html>
