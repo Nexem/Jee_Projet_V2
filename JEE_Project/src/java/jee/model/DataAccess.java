@@ -1,5 +1,9 @@
 package jee.model;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class DataAccess {
 
@@ -18,11 +23,34 @@ public class DataAccess {
     private String pwd;
     private ArrayList<EmployeeBean> employeesList;
     private ArrayList<User> usersList;
+    private InputStream inputStream;
 
-    public Connection getConnection() {
-        dbUrl = "jdbc:derby://localhost:1527/PROJET";
-        user = "adm";
-        pwd = "adm";
+    public Connection getConnection() throws FileNotFoundException, IOException {
+        
+    
+        try {
+            Properties prop = new Properties();
+            String propFileName = "Utils/db.properties";
+
+            inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+
+            if (inputStream != null) {
+                    prop.load(inputStream);
+            } else {
+                    throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+            }
+
+
+            dbUrl = prop.getProperty("dbUrl");
+            user = prop.getProperty("user");
+            pwd = prop.getProperty("pwd");
+        } catch (Exception e) {
+            System.out.println("Exception: " + e);
+        } finally {
+            inputStream.close();
+        }
+        
+        
         try {
 
             dbConn = DriverManager.getConnection(dbUrl, user, pwd);
