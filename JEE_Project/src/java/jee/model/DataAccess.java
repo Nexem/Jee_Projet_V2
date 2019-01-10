@@ -104,14 +104,15 @@ public class DataAccess {
         return rs;
     }
     
-    public ResultSet getResultUpdate(Statement stmt, String query) {
+    public int getResultUpdate(Statement stmt, String query) {
+        int i;
         try {
-            stmt.executeUpdate(query);
-
+            i = stmt.executeUpdate(query);
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
+            return 0;
         }
-        return rs;
+        return i;
     }
 
     public ArrayList getEmployees(ResultSet rs) {

@@ -86,16 +86,6 @@ public class Controller extends HttpServlet {
 
         }
         else if("AddEmployee".equals(button)){
-                        
-            /*String lastname = request.getParameter("nameField");
-            String firstname = request.getParameter("prenomField");
-            String homePhone = request.getParameter("tel_domField");
-            String cellPhone = request.getParameter("tel_mobField");
-            String workPhone = request.getParameter("tel_pField");
-            String cp = request.getParameter("codepostalFroField");
-            String address = request.getParameter("adresseield");
-            String town = request.getParameter("villeField");
-            String email = request.getParameter("emailField");*/
             
             if ((lastname != "" && firstname != "" && tel_dom != "" && tel_pro != "" && tel_mob != "" && address != "" && email != "" && town != "" && code != "")){
                 String insert_query = constants.QUERY_INSERT + "'" + lastname + "', '" + firstname + "', '" + tel_dom + "', '" + tel_mob + "', '" + tel_pro + "', '" + address + "', '" + code + "', '" + town + "', '" + email + "');";
@@ -140,19 +130,19 @@ public class Controller extends HttpServlet {
         else if(button.equals("Save modifications")){
             if(request.getParameter("ID") != ""){ 
                 String update_query = constants.QUERY_UPDATE_EMPLOYEE_ID;
-                update_query += "NAME = " + lastname;
-                update_query += ", FIRSTNAME = " + firstname;
-                update_query += ", HOME_PHONE = " + tel_dom;
-                update_query += ", MOBILE_PHONE = " + tel_mob;
-                update_query += ", WORK_PHONE = " + tel_pro;
-                update_query += ", ADDRESS = " + address;
-                update_query += ", POSTAL_CODE = " + code;
-                update_query += ", CITY = " + town;
-                update_query += ", EMAIL = " + email;
-                update_query += constants.QUERY_UPDATE_END_EMPLOYEE_ID + ID;
+                update_query += "NAME = '" + lastname;
+                update_query += "', FIRSTNAME = '" + firstname;
+                update_query += "', HOME_PHONE = '" + tel_dom;
+                update_query += "', MOBILE_PHONE = '" + tel_mob;
+                update_query += "', WORK_PHONE = '" + tel_pro;
+                update_query += "', ADDRESS = '" + address;
+                update_query += "', POSTAL_CODE = '" + code;
+                update_query += "', CITY = '" + town;
+                update_query += "', EMAIL = '" + email + "'";
+                update_query += constants.QUERY_UPDATE_END_EMPLOYEE_ID + ID + ";";
                 
                 session.setAttribute("message", update_query);
-                db.getResultUpdate(db.getStatement(db.getConnection()), update_query);
+                int i = db.getResultUpdate(db.getStatement(db.getConnection()), update_query);
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
             else{

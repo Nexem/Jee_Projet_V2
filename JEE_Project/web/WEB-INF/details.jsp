@@ -41,10 +41,10 @@
                 </form>
             </td>
         </table>
-        <form name="DetailsForm" method ="POST" action="Controller">
+        <form name="DetailsForm" method ="GET" action="Controller">
                 <h1>Details of employee : <%out.print(emp.getName()); out.print(("  " + emp.getFirstName()));%> </h1>
                 
-                <input type="text" name="ID" value="<%out.print(id);%>" disabled="disabled"/></br></br>
+                <input type="hidden" name="ID" value="<%out.print(id);%>"/></br></br>
                 Nom <input type="text" name="nameField" value="<%out.print(emp.getName());%>"/></br></br>
                 Prénom <input type="text" name="prenomField" value="<%out.print(emp.getFirstName());%>"/> </br></br>
                 Tél dom <input type="text" name="tel_domField" value="<%out.print(emp.getHomePhone());%>"/> </br></br>
@@ -54,9 +54,7 @@
                 Code postal <input type="text" name="codepostalField" value="<%out.print(emp.getPostalCode());%>"/> </br></br>
                 Ville <input type="text" name="villeField" value="<%out.print(emp.getCity());%>"/> </br></br>
                 Adresse e-mail <input type="text" name="emailField" value="<%out.print(emp.getEmail());%>"/> </br></br>  
-            </table>
-        </form>
-        <form name="DetailsButtonsForm" method ="POST" action="Controller">
+        </table>
             <input value="Save modifications" name="action" type="submit"/>
             <input value="Cancel modifications" name="action" type="submit"/>
         </form>
