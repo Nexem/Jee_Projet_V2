@@ -56,7 +56,7 @@
                 Adresse e-mail <input type="text" name="emailField" value="<%out.print(emp.getEmail());%>"/> </br></br>  
         </table>
             <input value="Save modifications" name="action" type="submit"/>
-            <input value="Cancel modifications" name="action" type="submit"/>
+            <input value="Cancel" name="action" type="submit"/>
         </form>
     </body>
 </html>

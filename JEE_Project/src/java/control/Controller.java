@@ -101,9 +101,6 @@ public class Controller extends HttpServlet {
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
         }
-        else if("Cancel".equals(button)){
-            request.getRequestDispatcher(constants.ADDPAGE).forward(request, response);
-        }
         
         //Delete functionalities
         else if(button.equals("Delete")){
@@ -158,7 +155,8 @@ public class Controller extends HttpServlet {
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
         }
-        else if(button.equals("Cancel modifications")){
+        
+        else if(button.equals("Cancel")){
             request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
         }
         
