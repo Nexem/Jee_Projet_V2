@@ -32,6 +32,17 @@ public class Controller extends HttpServlet {
         // Store the list of employees in a scope object
         session.setAttribute("employeesList",listEmployees );
         
+        String ID = request.getParameter("ID");
+        String lastname = request.getParameter("nameField");
+        String  firstname = request.getParameter("prenomField");
+        String  tel_dom = request.getParameter("tel_domField");
+        String  tel_mob = request.getParameter("tel_mobField");
+        String  tel_pro = request.getParameter("tel_proField");
+        String  address = request.getParameter("adresseField");
+        String  code = request.getParameter("codepostalField");
+        String  town = request.getParameter("villeField");
+        String  email = request.getParameter("emailField");
+                
         String button = (String)request.getParameter("action");
         if(button == null)
             button = "";
@@ -76,7 +87,7 @@ public class Controller extends HttpServlet {
         }
         else if("AddEmployee".equals(button)){
                         
-            String lastname = request.getParameter("nameField");
+            /*String lastname = request.getParameter("nameField");
             String firstname = request.getParameter("prenomField");
             String homePhone = request.getParameter("tel_domField");
             String cellPhone = request.getParameter("tel_mobField");
@@ -84,10 +95,10 @@ public class Controller extends HttpServlet {
             String cp = request.getParameter("codepostalFroField");
             String address = request.getParameter("adresseield");
             String town = request.getParameter("villeField");
-            String email = request.getParameter("emailField");
+            String email = request.getParameter("emailField");*/
             
-            if ((lastname != "" && firstname != "" && homePhone != "" && workPhone != "" && cellPhone != "" && address != "" && email != "" && town != "" && cp != "")){
-                String insert_query = constants.QUERY_INSERT + "'" + lastname + "', '" + firstname + "', '" + homePhone + "', '" + cellPhone + "', '" + workPhone + "', '" + address + "', '" + cp + "', '" + town + "', '" + email + "');";
+            if ((lastname != "" && firstname != "" && tel_dom != "" && tel_pro != "" && tel_mob != "" && address != "" && email != "" && town != "" && code != "")){
+                String insert_query = constants.QUERY_INSERT + "'" + lastname + "', '" + firstname + "', '" + tel_dom + "', '" + tel_mob + "', '" + tel_pro + "', '" + address + "', '" + code + "', '" + town + "', '" + email + "');";
                 session.setAttribute("message",insert_query);
                 db.getResultSet(db.getStatement(db.getConnection()), insert_query);
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
@@ -104,7 +115,7 @@ public class Controller extends HttpServlet {
         //Delete functionalities
         else if(button.equals("Delete")){
             if(request.getParameter("ID") != null){
-                String ID = request.getParameter("ID");
+                //String ID = request.getParameter("ID");
                 String delete_query = constants.QUERY_DELETE_EMPLOYEE_ID + ID + ";";
                 db.getResultSet(db.getStatement(db.getConnection()), delete_query);
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
@@ -128,27 +139,16 @@ public class Controller extends HttpServlet {
         }
         else if(button.equals("Save modifications")){
             if(request.getParameter("ID") != ""){ 
-                String ID = request.getParameter("ID");
-                String name = request.getParameter("nameField");
-                String  prenom = request.getParameter("prenomField");
-                String  tel_dom = request.getParameter("tel_domField");
-                String  tel_mob = request.getParameter("tel_mobField");
-                String  tel_pro = request.getParameter("tel_proField");
-                String  adresse = request.getParameter("adresseField");
-                String  code = request.getParameter("codepostalField");
-                String  ville = request.getParameter("villeField");
-                String  mail = request.getParameter("emailField");
-                
                 String update_query = constants.QUERY_UPDATE_EMPLOYEE_ID;
-                update_query += "NAME = " + name;
-                update_query += ", FIRSTNAME = " + prenom;
+                update_query += "NAME = " + lastname;
+                update_query += ", FIRSTNAME = " + firstname;
                 update_query += ", HOME_PHONE = " + tel_dom;
                 update_query += ", MOBILE_PHONE = " + tel_mob;
                 update_query += ", WORK_PHONE = " + tel_pro;
-                update_query += ", ADDRESS = " + adresse;
+                update_query += ", ADDRESS = " + address;
                 update_query += ", POSTAL_CODE = " + code;
-                update_query += ", CITY = " + ville;
-                update_query += ", EMAIL = " + mail;
+                update_query += ", CITY = " + town;
+                update_query += ", EMAIL = " + email;
                 update_query += constants.QUERY_UPDATE_END_EMPLOYEE_ID + ID;
                 
                 session.setAttribute("message", update_query);
