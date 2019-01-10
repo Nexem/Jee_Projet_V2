@@ -22,23 +22,10 @@
 		</div>
 		<div class="form-group">
                     <label for="exampleInputPassword1">Password :</label>
-                    <input type="Password" name="Password" class="form-control" id="loginPassword" placeholder="Password" required='required'>
+                    <input type="Password" name="pwdField" class="form-control"  data-placeholder="Password" required='required'>
 		</div>
-		<button name="action" type="submit" class="btn btn-primary btn-lg">Submit</button>
-		<button name="action" type="reset" class="btn btn-primary btn-lg">Reset</button>
-                
-                
-                <table>
-                    <tr>
-                        <span class="focus-input100" data-placeholder="Login"></span>
-                    </tr>
-                    <tr> 
-                        <th>Password : </th><th><input type="text" name="pwdField"/></th>
-                        <span class="focus-input100" data-placeholder="Password"></span>
-                    </tr>
-                </table>
-                <input type="submit" name="action" value="Send"/>
-
+		<button name="action" type="submit" class="btn btn-primary btn-lg" value="Send">Submit</button>
+                <button name="action" type="reset" class="btn btn-primary btn-lg">Reset</button>
             </form>
         </div>
     </body>
