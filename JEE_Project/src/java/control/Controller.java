@@ -12,6 +12,9 @@ import jee.model.DataAccess;
 import jee.model.EmployeeBean;
 import jee.model.User;
 import Utils.constants;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Controller extends HttpServlet {
 
@@ -88,9 +91,9 @@ public class Controller extends HttpServlet {
         else if("AddEmployee".equals(button)){
             
             if ((lastname != "" && firstname != "" && tel_dom != "" && tel_pro != "" && tel_mob != "" && address != "" && email != "" && town != "" && code != "")){
-                String insert_query = constants.QUERY_INSERT + "'" + lastname + "', '" + firstname + "', '" + tel_dom + "', '" + tel_mob + "', '" + tel_pro + "', '" + address + "', '" + code + "', '" + town + "', '" + email + "');";
+                String insert_query = constants.QUERY_INSERT + "'" + lastname + "', '" + firstname + "', '" + tel_dom + "', '" + tel_mob + "', '" + tel_pro + "', '" + address + "', '" + code + "', '" + town + "', '" + email + "')";
                 session.setAttribute("message",insert_query);
-                db.getResultSet(db.getStatement(db.getConnection()), insert_query);
+                db.getResultUpdate(db.getStatement(db.getConnection()), insert_query);
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
             else{
@@ -106,8 +109,8 @@ public class Controller extends HttpServlet {
         else if(button.equals("Delete")){
             if(request.getParameter("ID") != null){
                 //String ID = request.getParameter("ID");
-                String delete_query = constants.QUERY_DELETE_EMPLOYEE_ID + ID + ";";
-                db.getResultSet(db.getStatement(db.getConnection()), delete_query);
+                String delete_query = constants.QUERY_DELETE_EMPLOYEE_ID + ID;
+                db.getResultUpdate(db.getStatement(db.getConnection()), delete_query);
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
             else{
@@ -131,18 +134,23 @@ public class Controller extends HttpServlet {
             if(request.getParameter("ID") != ""){ 
                 String update_query = constants.QUERY_UPDATE_EMPLOYEE_ID;
                 update_query += "NAME = '" + lastname;
-                update_query += "', FIRSTNAME = '" + firstname;
-                update_query += "', HOME_PHONE = '" + tel_dom;
-                update_query += "', MOBILE_PHONE = '" + tel_mob;
-                update_query += "', WORK_PHONE = '" + tel_pro;
-                update_query += "', ADDRESS = '" + address;
-                update_query += "', POSTAL_CODE = '" + code;
-                update_query += "', CITY = '" + town;
-                update_query += "', EMAIL = '" + email + "'";
-                update_query += constants.QUERY_UPDATE_END_EMPLOYEE_ID + ID + ";";
+                update_query += "', FIRSTNAME='" + firstname;
+                update_query += "', HOME_PHONE='" + tel_dom;
+                update_query += "', MOBILE_PHONE='" + tel_mob;
+                update_query += "', WORK_PHONE='" + tel_pro;
+                update_query += "', ADDRESS='" + address;
+                update_query += "', POSTAL_CODE='" + code;
+                update_query += "', CITY='" + town;
+                update_query += "', EMAIL='" + email + "'";
+                update_query += constants.QUERY_UPDATE_END_EMPLOYEE_ID + ID;
                 
                 session.setAttribute("message", update_query);
-                int i = db.getResultUpdate(db.getStatement(db.getConnection()), update_query);
+                try {
+                    db.getStatement(db.getConnection()).executeUpdate(update_query);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //int i = db.getResultUpdate(db.getStatement(db.getConnection()), update_query);
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
             else{
