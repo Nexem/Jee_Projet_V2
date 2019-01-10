@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!--
+<root>
+    <persistence>
+        <persistence-unit name="SomePUnit">
+            <provider>org.hibernate.ejb.HibernatePersistence</provider>
+            <class>myapp.MyEntity</class>
+            <properties>
+                <property name="javax.persistence.jdbc.driver" value="org.derby.Driver"/>       
+                <property name="javax.persistence.jdbc.url"  value="jdbc:derby://localhost:1527/PROJET"/>       
+                <property name="javax.persistence.jdbc.user" value="adm"/>       
+                <property name="javax.persistence.jdbc.password" value="adm"/>   
+           </properties>
+       </persistence-unit>
+   </persistence>
+</root>
+-->

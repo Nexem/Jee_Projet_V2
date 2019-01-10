@@ -15,8 +15,18 @@ import Utils.constants;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+//@PersistenceContext (unitName="SomePUnit")
 
 public class Controller extends HttpServlet {
+    /*EntityManagerFactory emf = Persistence.createEntityManagerFactory("MaBaseDeTest");
+    EntityManager em = emf.createEntityManager();*/
 
     ArrayList<EmployeeBean> listEmployees;
     ArrayList<User> listUsers;
@@ -92,8 +102,32 @@ public class Controller extends HttpServlet {
             
             if ((lastname != "" && firstname != "" && tel_dom != "" && tel_pro != "" && tel_mob != "" && address != "" && email != "" && town != "" && code != "")){
                 String insert_query = constants.QUERY_INSERT + "'" + lastname + "', '" + firstname + "', '" + tel_dom + "', '" + tel_mob + "', '" + tel_pro + "', '" + address + "', '" + code + "', '" + town + "', '" + email + "')";
-                //session.setAttribute("message",insert_query);
+                session.setAttribute("message",insert_query);
                 db.getResultUpdate(db.getStatement(db.getConnection()), insert_query);
+                
+                /*
+                EntityTransaction transac = em.getTransaction();
+                transac.begin();
+
+                EmployeeBean emp = new EmployeeBean();
+                emp.setName(lastname);
+                emp.setFirstName(firstname);
+                emp.setHomePhone(tel_dom);
+                emp.setWorkPhone(tel_pro);
+                emp.setMobilePhone(tel_mob);
+                emp.setAddress(address);
+                emp.setEmail(email);
+                emp.setCity(town);
+                emp.setPostalCode(code);
+                
+                //Query addQuery = em.createQuery(insert_query);
+                //int emp = addQuery.executeUpdate();
+                em.persist(emp);
+                
+                transac.commit();
+                
+                em.close();
+                emf.close();*/
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
             else{
@@ -105,7 +139,16 @@ public class Controller extends HttpServlet {
         //Delete functionalities
         else if(button.equals("Delete")){
             if(request.getParameter("ID") != null){
-                //String ID = request.getParameter("ID");
+                /*EntityTransaction transac = em.getTransaction();
+                transac.begin();
+                EmployeeBean emp = em.find(EmployeeBean.class, ID);   
+                if (emp == null) {
+                    System.out.println("Personne non trouvée");
+                } else {
+                em.remove(emp);
+                }
+                transac.commit();
+                em.close();*/
                 String delete_query = constants.QUERY_DELETE_EMPLOYEE_ID + ID;
                 db.getResultUpdate(db.getStatement(db.getConnection()), delete_query);
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
@@ -178,7 +221,7 @@ public class Controller extends HttpServlet {
         }
         
     }
-
+//em.close();
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -218,4 +261,5 @@ public class Controller extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    
 }

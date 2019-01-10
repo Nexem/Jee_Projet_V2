@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DataAccess {
 
@@ -52,37 +54,17 @@ public class DataAccess {
         
         
         try {
-
+            Class.forName("com.mysql.cj.jdbc.Driver");
             dbConn = DriverManager.getConnection(dbUrl, user, pwd);
 
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
 
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
         return dbConn;
     }
-    /*NE FONCTIONNE PAS, EN LIEN AVEC LE db.propertiesf
-    public Connection getConnection() {
-        try {
-            Properties prop = new Properties();
-            InputStream input;
-            ClassLoader cl = Thread.currentThread().getContextClassLoader();
-            input = cl.getResourceAsStream(constants.PROPERTIES_FILE);
-            prop.load(input);
-            
-            dbUrl = prop.getProperty(constants.DB_URL);
-            user = prop.getProperty(constants.DB_USER);
-            pwd = prop.getProperty(constants.DB_PWD);
-
-            dbConn = DriverManager.getConnection(dbUrl, user, pwd);
-
-        } catch (SQLException | IOException ex) {
-             Logger.getLogger(DataAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return dbConn;
-
-    }
-    */
 
     public Statement getStatement(Connection dbConn) {
         try {

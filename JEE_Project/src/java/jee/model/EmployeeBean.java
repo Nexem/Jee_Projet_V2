@@ -1,16 +1,41 @@
 package jee.model;
 
+import javax.persistence.Entity;
+import javax.persistence.*;
+import static javax.persistence.GenerationType.AUTO;
+
+//@Entity
+//@Table(name="EMPLOYEE")
 public class EmployeeBean {
     
+    //@Id @GeneratedValue(strategy=AUTO) 
     private int ID;
+    
+    //@Column(name="NAME", nullable=false, length=100) 
     private String name;
+    
+    //@Column(name="FIRSTNAME", nullable=false, length=100) 
     private String firstName;
+    
+    //@Column(name="HOME_PHONE", nullable=false, length=100) 
     private String homePhone;
+    
+    //@Column(name="MOBILE_PHONE", nullable=false, length=100) 
     private String mobilePhone;
+    
+    //@Column(name="WORK_PHONE", nullable=false, length=100) 
     private String workPhone;
+    
+    //@Column(name="ADDRESS", nullable=false, length=100) 
     private String address;
+    
+    //@Column(name="POSTAL_CODE", nullable=false, length=100) 
     private String postalCode;
+    
+    //@Column(name="CITY", nullable=false, length=100) 
     private String city;
+    
+    //@Column(name="EMAIL", nullable=false, length=100) 
     private String email;
 
     public int getID() {
