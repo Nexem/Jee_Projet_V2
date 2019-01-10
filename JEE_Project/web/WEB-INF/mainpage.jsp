@@ -5,16 +5,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Employees</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script  src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" > </script>
+	<script  src = "C:\wamp\www\site\bootstrap\dist\js\bootstrap.min.js" > </script>
     </head>
     <body>
         <table align="right">
             <th style="color:blue">Your session is active</th>
             <td>
                 <form action="Controller" method="POST">
-                    <button type="submit" name="action" value="Goodbye">Disconnect</button>
-                    <!--input type="image" src="../../../image.jpg" name="OffButton" value="goodbye" width="100" height="100"-->
+                    <button type="submit" name="action" class="btn btn-default" aria-label="Left Align" value="Goodbye">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    </button>
                 </form>
             </td>
         </table>
