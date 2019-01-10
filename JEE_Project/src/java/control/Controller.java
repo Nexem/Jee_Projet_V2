@@ -77,12 +77,12 @@ public class Controller extends HttpServlet {
         else if(button.equals("Delete")){
             if(request.getParameter("ID") != null){
                 String ID = request.getParameter("ID");
-                String delete_query = constants.QUERY_DELETE_USER_ID + ID + ";";
+                String delete_query = constants.QUERY_DELETE_EMPLOYEE_ID + ID + ";";
                 db.getResultSet(db.getStatement(db.getConnection()), delete_query);
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
             else{
-                session.setAttribute("message", "You must select an employee1");
+                session.setAttribute("message", "You must select an employee");
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
         }
@@ -94,19 +94,41 @@ public class Controller extends HttpServlet {
                 request.getRequestDispatcher(constants.DETAILSPAGE).forward(request, response);
             }
             else{
-                session.setAttribute("message", "You must select an employee2");
+                session.setAttribute("message", "You must select an employee");
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
         }
         else if(button.equals("Save modifications")){
-            if(request.getParameter("ID") != null){
+            if(request.getParameter("ID") != ""){ 
                 String ID = request.getParameter("ID");
+                String name = request.getParameter("nameField");
+                String  prenom = request.getParameter("prenomField");
+                String  tel_dom = request.getParameter("tel_domField");
+                String  tel_mob = request.getParameter("tel_mobField");
+                String  tel_pro = request.getParameter("tel_proField");
+                String  adresse = request.getParameter("adresseField");
+                String  code = request.getParameter("codepostalField");
+                String  ville = request.getParameter("villeField");
+                String  mail = request.getParameter("emailField");
                 
-                //faire les vérifications si champs modifiés ou non
+                String update_query = constants.QUERY_UPDATE_EMPLOYEE_ID;
+                update_query += "NAME = " + name;
+                update_query += ", FIRSTNAME = " + prenom;
+                update_query += ", HOME_PHONE = " + tel_dom;
+                update_query += ", MOBILE_PHONE = " + tel_mob;
+                update_query += ", WORK_PHONE = " + tel_pro;
+                update_query += ", ADDRESS = " + adresse;
+                update_query += ", POSTAL_CODE = " + code;
+                update_query += ", CITY = " + ville;
+                update_query += ", EMAIL = " + mail;
+                update_query += constants.QUERY_UPDATE_END_EMPLOYEE_ID + ID;
                 
-                String update_query = constants.QUERY_UPDATE_USER_ID;
-                update_query += constants.QUERY_UPDATE_END_USER_ID + ID + ";";
-                db.getResultSet(db.getStatement(db.getConnection()), update_query);
+                session.setAttribute("message", update_query);
+                db.getResultUpdate(db.getStatement(db.getConnection()), update_query);
+                request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+            }
+            else{
+                session.setAttribute("message", "can't save details");
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
         }

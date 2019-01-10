@@ -43,6 +43,8 @@
         </table>
         <form name="DetailsForm" method ="POST" action="Controller">
                 <h1>Details of employee : <%out.print(emp.getName()); out.print(("  " + emp.getFirstName()));%> </h1>
+                
+                <input type="text" name="ID" value="<%out.print(id);%>" disabled="disabled"/></br></br>
                 Nom <input type="text" name="nameField" value="<%out.print(emp.getName());%>"/></br></br>
                 Prénom <input type="text" name="prenomField" value="<%out.print(emp.getFirstName());%>"/> </br></br>
                 Tél dom <input type="text" name="tel_domField" value="<%out.print(emp.getHomePhone());%>"/> </br></br>

@@ -107,6 +107,19 @@ public class DataAccess {
         return rs;
 
     }
+    
+    public ResultSet getResultUpdate(Statement stmt, String query) {
+
+        try {
+            stmt.executeUpdate(query);
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+
+        }
+        return rs;
+
+    }
 
     public ArrayList getEmployees(ResultSet rs) {
         employeesList = new ArrayList<EmployeeBean>();
