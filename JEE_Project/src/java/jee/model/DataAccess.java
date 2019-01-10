@@ -96,29 +96,22 @@ public class DataAccess {
     }
 
     public ResultSet getResultSet(Statement stmt, String query) {
-
         try {
             rs = stmt.executeQuery(query);
-
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
-
         }
         return rs;
-
     }
     
     public ResultSet getResultUpdate(Statement stmt, String query) {
-
         try {
             stmt.executeUpdate(query);
 
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
-
         }
         return rs;
-
     }
 
     public ArrayList getEmployees(ResultSet rs) {
