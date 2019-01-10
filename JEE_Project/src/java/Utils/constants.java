@@ -8,6 +8,7 @@ public class constants {
     public static final String QUERY_UPDATE_EMPLOYEE_ID = "UPDATE EMPLOYEES SET ";
     public static final String QUERY_UPDATE_END_EMPLOYEE_ID = " WHERE ID = ";
     public static final String QUERY_DETAILS_ID = "SELECT * FROM EMPLOYEES WHERE ID = ";
+    public static final String QUERY_INSERT = "INSERT INTO EMPLOYEES (NAME, FIRSTNAME, HOME_PHONE, MOBILE_PHONE, WORK_PHONE, ADDRESS, POSTAL_CODE, CITY, EMAIL) VALUES (";
     
     public static final String MAINPAGE = "WEB-INF/mainpage.jsp";
     public static final String LOGINPAGE = "WEB-INF/login.jsp";

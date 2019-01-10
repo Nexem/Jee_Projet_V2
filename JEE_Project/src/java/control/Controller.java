@@ -69,7 +69,35 @@ public class Controller extends HttpServlet {
         }
         
         //Add functionalities
-        else if(button.equals("Add")){
+         else if("Add".equals(button)){
+            
+            request.getRequestDispatcher(constants.ADDPAGE).forward(request, response);
+
+        }
+        else if("AddEmployee".equals(button)){
+                        
+            String lastname = request.getParameter("nameField");
+            String firstname = request.getParameter("prenomField");
+            String homePhone = request.getParameter("tel_domField");
+            String cellPhone = request.getParameter("tel_mobField");
+            String workPhone = request.getParameter("tel_pField");
+            String cp = request.getParameter("codepostalFroField");
+            String address = request.getParameter("adresseield");
+            String town = request.getParameter("villeField");
+            String email = request.getParameter("emailField");
+            
+            if ((lastname != "" && firstname != "" && homePhone != "" && workPhone != "" && cellPhone != "" && address != "" && email != "" && town != "" && cp != "")){
+                String insert_query = constants.QUERY_INSERT + "'" + lastname + "', '" + firstname + "', '" + homePhone + "', '" + cellPhone + "', '" + workPhone + "', '" + address + "', '" + cp + "', '" + town + "', '" + email + "');";
+                session.setAttribute("message",insert_query);
+                db.getResultSet(db.getStatement(db.getConnection()), insert_query);
+                request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+            }
+            else{
+                session.setAttribute("message", "You must enter values in all fields");
+                request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
+            }
+        }
+        else if("Cancel".equals(button)){
             request.getRequestDispatcher(constants.ADDPAGE).forward(request, response);
         }
         
