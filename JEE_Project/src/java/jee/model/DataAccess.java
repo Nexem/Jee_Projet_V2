@@ -120,6 +120,7 @@ public class DataAccess {
         try {
             while (rs.next()) {
                 EmployeeBean employee = new EmployeeBean();
+                employee.setID(rs.getInt("ID"));
                 employee.setFirstName(rs.getString("FIRSTNAME"));
                 employee.setName(rs.getString("NAME"));
                 employee.setHomePhone(rs.getString("HOME_PHONE"));
@@ -141,6 +142,7 @@ public class DataAccess {
         EmployeeBean employee = new EmployeeBean();
         try {
             while (rs.next()) {
+                employee.setID(rs.getInt("ID"));
                 employee.setFirstName(rs.getString("FIRSTNAME"));
                 employee.setName(rs.getString("NAME"));
                 employee.setHomePhone(rs.getString("HOME_PHONE"));

@@ -92,7 +92,7 @@ public class Controller extends HttpServlet {
             
             if ((lastname != "" && firstname != "" && tel_dom != "" && tel_pro != "" && tel_mob != "" && address != "" && email != "" && town != "" && code != "")){
                 String insert_query = constants.QUERY_INSERT + "'" + lastname + "', '" + firstname + "', '" + tel_dom + "', '" + tel_mob + "', '" + tel_pro + "', '" + address + "', '" + code + "', '" + town + "', '" + email + "')";
-                session.setAttribute("message",insert_query);
+                //session.setAttribute("message",insert_query);
                 db.getResultUpdate(db.getStatement(db.getConnection()), insert_query);
                 request.getRequestDispatcher(constants.MAINPAGE).forward(request, response);
             }
@@ -141,7 +141,7 @@ public class Controller extends HttpServlet {
                 update_query += "', EMAIL='" + email + "'";
                 update_query += constants.QUERY_UPDATE_END_EMPLOYEE_ID + ID;
                 
-                session.setAttribute("message", update_query);
+                //session.setAttribute("message", update_query);
                 try {
                     db.getStatement(db.getConnection()).executeUpdate(update_query);
                 } catch (SQLException ex) {

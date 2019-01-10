@@ -1,3 +1,5 @@
+<%@page import="jee.model.EmployeeBean"%>
+<%@page import="jee.model.DataAccess"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -47,12 +49,10 @@
                     <th align="center">EMAIL</th>
                 </tr>
 
-                <%
-                    int i = 1;
-                    %>
+                
                 <c:forEach items="${employeesList}" var="emp">
                     <tr>
-                        <td align="center"><input type="radio" name="ID" value="<% out.print(i); %>"/></td>
+                        <td align="center"><input type="radio" name="ID" value="${emp.ID}"/></td>
                         <td align="center"><c:out value="${emp.name}"/></td>
                         <td align="center"><c:out value="${emp.firstName}"/></td>
                         <td align="center"><c:out value="${emp.homePhone}"/></td>
@@ -64,9 +64,6 @@
                         <td align="center"><c:out value="${emp.email}"/></td>
 
                     </tr>
-                    <%
-                    i ++;
-                %>
                 </c:forEach>
                 
             </table>
